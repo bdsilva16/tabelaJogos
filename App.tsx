@@ -25,8 +25,8 @@ export default function App() {
       .then(response => response.text())
       .then(result => JSON.parse(result))
       .then(dataJson => {
-        console.log(dataJson)
-        dataJson.map((departure: any) => {
+        // console.log(dataJson)
+        dataJson.map((departure) => {
 
           const dataDeparture: DepartureEntity = {
 
@@ -81,7 +81,7 @@ export default function App() {
 
             <View style={styles.item}>
               <Text>breno</Text>
-              <Image source={departure.item.time_mandante.escudo}/>
+              <Image source={{uri:departure.item.time_mandante.escudo}}/>
             </View>
 
           }
