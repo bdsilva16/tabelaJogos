@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import DepartureEntity from './src/entities/departure_entity';
 import { Image } from 'expo-image';
+import { useEffect, useState } from 'react';
 
 
 export default function App() {
@@ -21,29 +21,14 @@ export default function App() {
 
     let departuresList: DepartureEntity[] = [];
 
-    fetch("https://api.api-futebol.com.br/v1/partidas/10", requestOptions)
+    fetch("https://api.api-futebol.com.br/v1/ao-vivo", requestOptions)
       .then(response => response.text())
       .then(result => JSON.parse(result))
       .then(dataJson => {
         // console.log(dataJson)
-        dataJson.map((departure) => {
-
+        dataJson.map((departure: any) => {
           const dataDeparture: DepartureEntity = {
-
             partida_id: departure['partida_id'],
-            campeonato: {
-              campeonato_id: departure['campeonato']['campeonato_id'],
-              nome: departure['campeonato']['nome'],
-              slug: departure['campeonato']['slug'],
-              nome_popular: departure['campeonato']['nome_popular'],
-              fase_atual: {
-                fase_id: departure['fase_atual']['fase_id'],
-                nome: departure['fase_atual']['nome'],
-                slug: departure['fase_atual']['slug'],
-                tipo: departure['fase_atual']['tipo']
-                // _link: /v1/campeonatos/10/fases/317
-              }
-            },
             placar: departure['placar'],
             time_mandante: {
               time_id: departure['time_mandante']['time_id'],
@@ -61,7 +46,6 @@ export default function App() {
             placar_visitante: departure['placar_visitante']
           };
 
-
           departuresList.push(dataDeparture);
         });
         setDeparture(departuresList);
@@ -70,24 +54,38 @@ export default function App() {
       .catch(error => console.log('error', error));
   }, []);
 
+  const renderDeparture = ({ item }: { item: DepartureEntity }) => (
+
+      <View style={styles.card}>
+        <View style={styles.item}>
+
+        <View style={styles.team_shieldContainer}>
+          <Image style={styles.team_shield} source={{ uri: item.time_mandante.escudo }} />
+          <Text style={styles.text}>{item.time_mandante.nome_popular}</Text>
+        </View>
+
+          <Text style={styles.text}>{item.placar_mandante}</Text>
+          <Text style={styles.text}>x</Text>
+          <Text style={styles.text}>{item.placar_visitante}</Text>
+        
+        <View style={styles.team_shieldContainer}>
+          <Image style={styles.team_shield} source={{ uri: item.time_visitante.escudo.toString() }} />
+          <Text style={styles.text}>{item.time_visitante.nome_popular}</Text>
+        </View>
+        </View>
+
+      </View>
+
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Champions League</Text>
-      <View style={styles.card}>
-        <FlatList
-          data={departures}
-          keyExtractor={(item) => item.partida_id.toString()}
-          renderItem={(departure) =>
-
-            <View style={styles.item}>
-              <Text>breno</Text>
-              <Image source={{uri:departure.item.time_mandante.escudo}}/>
-            </View>
-
-          }
-        />
-      </View>
-
+      <FlatList
+        data={departures}
+        keyExtractor={(item) => item.partida_id.toString()}
+        renderItem={renderDeparture}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -106,36 +104,37 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     alignItems: 'center',
-    marginTop: 60
+    marginTop: 80
 
   },
   card: {
     backgroundColor: '#fff',
-    width: '80%',
-    height: 180,
+    width: '90%',
+    height: 140,
     borderRadius: 10,
-    margin: 30
-
+    margin:20,
+    alignItems: 'center',
+    marginTop:80
   },
   item: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingHorizontal: 5,
-    paddingTop: 8,
-    height: 50
-  },
-  team_name: {
-    fontSize: 20,
-    width: 180,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'black'
+    alignItems:'center',
+    
   },
   team_shield: {
-    width: 30,
-    height: 30,
-    marginRight: 15
+    width: 80,
+    height: 80,
+    marginHorizontal: 10,
+    margin:10
   },
+  team_shieldContainer: {
+    alignItems:'center',
+    margin:5
+  },
+  text: {
+    fontWeight: '700',
+    fontSize: 15,
+    margin:5
+  }
 
 });
