@@ -7,7 +7,7 @@ export default class DepartureEntity {
         sigla: string;
         escudo: string;
     };
-    time_visitante: {
+    time_visitante: { 
         time_id: number;
         nome_popular: string;
         sigla: string;
