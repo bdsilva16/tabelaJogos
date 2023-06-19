@@ -3,7 +3,12 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import DepartureEntity from './src/entities/departure_entity';
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
+import ImagComp from './src/components/imagComp';
 
+
+const imageChamp = [
+  require('./assets/champions.png')
+]
 
 export default function App() {
 
@@ -56,38 +61,41 @@ export default function App() {
 
   const renderDeparture = ({ item }: { item: DepartureEntity }) => (
 
-      <View style={styles.card}>
-        <View style={styles.item}>
+    <View style={styles.card}>
+      <View style={styles.item}>
 
         <View style={styles.team_shieldContainer}>
           <Image style={styles.team_shield} source={{ uri: item.time_mandante.escudo }} />
           <Text style={styles.text}>{item.time_mandante.nome_popular}</Text>
         </View>
 
-          <Text style={styles.text}>{item.placar_mandante}</Text>
-          <Text style={styles.text}>x</Text>
-          <Text style={styles.text}>{item.placar_visitante}</Text>
-        
+        <Text style={styles.text}>{item.placar_mandante}</Text>
+        <Text style={styles.text}>:</Text>
+        <Text style={styles.text}>{item.placar_visitante}</Text>
+
         <View style={styles.team_shieldContainer}>
           <Image style={styles.team_shield} source={{ uri: item.time_visitante.escudo.toString() }} />
           <Text style={styles.text}>{item.time_visitante.nome_popular}</Text>
         </View>
-        </View>
-
       </View>
+
+    </View>
 
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Champions League</Text>
-      <FlatList
-        data={departures}
-        keyExtractor={(item) => item.partida_id.toString()}
-        renderItem={renderDeparture}
-      />
-      <StatusBar style="auto" />
-    </View>
+      <View style={styles.container}>
+        <View style={styles.item}>
+          <ImagComp propsImage={imageChamp}/>
+          <Text style={styles.title}>Champions League</Text>
+        </View>
+        <FlatList
+          data={departures}
+          keyExtractor={(item) => item.partida_id.toString()}
+          renderItem={renderDeparture}
+        />
+        <StatusBar style="auto" />
+      </View>
   );
 }
 
@@ -97,45 +105,49 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: '#66748b',
-
   },
   title: {
     color: '#fff',
     fontSize: 20,
     fontWeight: '700',
     alignItems: 'center',
-    marginTop: 80
+    marginTop: 70,
+    margin: 10,
 
   },
   card: {
     backgroundColor: '#fff',
     width: '90%',
-    height: 140,
+    height: 150,
     borderRadius: 10,
-    margin:20,
+    margin: 20,
     alignItems: 'center',
-    marginTop:80
+    marginTop: 30,
+    borderColor: 'black',
+    borderWidth: 3,
+    elevation: 15,
+    shadowColor: '#fff',
   },
   item: {
     flexDirection: 'row',
-    alignItems:'center',
-    
+    alignItems: 'center',
+    justifyContent: 'center',
+
+
   },
   team_shield: {
     width: 80,
     height: 80,
-    marginHorizontal: 10,
-    margin:10
+    marginHorizontal: 20,
+
   },
   team_shieldContainer: {
-    alignItems:'center',
-    margin:5
+    alignItems: 'center',
+    margin: 15
   },
   text: {
     fontWeight: '700',
     fontSize: 15,
-    margin:5
-  }
-
+    margin: 5
+  },
 });
- 
