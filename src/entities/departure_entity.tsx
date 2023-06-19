@@ -15,4 +15,4 @@ export default class DepartureEntity {
     };
     placar_mandante: number;
     placar_visitante: number
-} 
+}

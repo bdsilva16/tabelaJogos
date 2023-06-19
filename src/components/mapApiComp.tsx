@@ -66,10 +66,12 @@ export default function MapApiComp() {
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.item}>
         <ImagComp propsImage={imageChamp} />
         <TitleComp />
       </View>
+
       <FlatList
         data={departures}
         keyExtractor={(item) => item.partida_id.toString()}
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#66748b',
+    backgroundColor: '#182052',
   },
   item: {
     flexDirection: 'row',

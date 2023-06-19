@@ -12,8 +12,8 @@ export default function CardComp(props:Props) {
             <View style={styles.item}>
 
                 <View style={styles.team_shieldContainer}>
-                    <Image style={styles.team_shield} source={{ uri: props.propsItem.time_mandante.escudo }} />
-                    <Text style={styles.text}>{props.propsItem.time_mandante.nome_popular}</Text>
+                    <Image contentFit="contain" style={styles.team_shield} source={{ uri: props.propsItem.time_mandante.escudo }} />
+                    <Text style={styles.team_name}>{props.propsItem.time_mandante.nome_popular}</Text>
                 </View>
 
                 <Text style={styles.placar}>{props.propsItem.placar_mandante}</Text>
@@ -21,8 +21,8 @@ export default function CardComp(props:Props) {
                 <Text style={styles.placar}>{props.propsItem.placar_visitante}</Text>
 
                 <View style={styles.team_shieldContainer}>
-                    <Image style={styles.team_shield} source={{ uri: props.propsItem.time_visitante.escudo.toString() }} />
-                    <Text style={styles.text}>{props.propsItem.time_visitante.nome_popular}</Text>
+                    <Image contentFit="contain" style={styles.team_shield} source={{ uri: props.propsItem.time_visitante.escudo.toString() }} />
+                    <Text style={styles.team_name}>{props.propsItem.time_visitante.nome_popular}</Text>
                 </View>
             </View>
 
@@ -32,35 +32,33 @@ export default function CardComp(props:Props) {
 const styles = StyleSheet.create({
     card: {
       backgroundColor: '#fff',
-      width: '90%',
+      // aspectRatio:2.3,
+      width:'90%',
       height: 150,
-      borderRadius: 10,
+      borderRadius: 15,
       margin: 20,
       alignItems: 'center',
       marginTop: 30,
       borderColor: 'black',
       borderWidth: 3,
       elevation: 15,
-      shadowColor: '#fff',
+      shadowColor: 'black',
     },
     item: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-  
-  
     },
     team_shield: {
       width: 80,
       height: 80,
       marginHorizontal: 20,
-  
     },
     team_shieldContainer: {
       alignItems: 'center',
-      margin: 15
+      margin: 10
     },
-    text: {
+    team_name: {
       fontWeight: '700',
       fontSize: 15,
       margin: 5

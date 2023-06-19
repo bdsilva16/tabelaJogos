@@ -16,8 +16,8 @@ export default function ImagComp(props:Props) {
 const styles = StyleSheet.create({
 
     image: {
-        height: 50,
-        width: 50,
+        height: 60,
+        width: 60,
         marginTop: 75,
     }
 
