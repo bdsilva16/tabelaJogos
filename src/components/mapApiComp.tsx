@@ -36,6 +36,11 @@ export default function MapApiComp() {
           const dataDeparture: DepartureEntity = {
             partida_id: departure['partida_id'],
             placar: departure['placar'],
+            campeonato: {
+              campeonato_id: departure['campeonato']['campeonato_id'],
+              nome: departure['campeonato']['nome'],
+              slug: departure['campeonato']['slug'],
+          },
             time_mandante: {
               time_id: departure['time_mandante']['time_id'],
               nome_popular: departure['time_mandante']['nome_popular'],
@@ -66,11 +71,11 @@ export default function MapApiComp() {
 
   return (
     <View style={styles.container}>
-      
-      <View style={styles.item}>
+
+      {/* <View style={styles.item}>
         <ImagComp propsImage={imageChamp} />
-        <TitleComp />
-      </View>
+        <TitleComp/>
+      </View> */}
 
       <FlatList
         data={departures}
@@ -89,9 +94,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#182052',
   },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center', 
-  }
+  // item: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   justifyContent: 'center', 
+  // }
 });

@@ -1,9 +1,13 @@
 import { Text, StyleSheet } from "react-native"
 
-export default function TitleComp() {
+interface Props{
+    propsItem:any
+}
+
+export default function TitleComp(props:Props) {
     return (
         <Text style={styles.title}>
-            Champions League
+            {props.propsItem.campeonato.nome}
         </Text>
     )
 }
@@ -12,8 +16,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         fontWeight: '700',
-        alignItems: 'center',
+        textAlign:'center',
         marginTop: 70,
-        margin: 10,
+        margin:5
+
     },
 });
